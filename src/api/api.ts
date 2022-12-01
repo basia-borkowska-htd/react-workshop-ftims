@@ -22,6 +22,3 @@ export const api = {
 		return apiWithConfig.delete(`/accounts/${login}`)
 	},
 }
-// TODO issues and questions:
-// shouldn't we operate on id instead od login? (we can edit login)
-// check return types

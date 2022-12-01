@@ -5,7 +5,6 @@ export const TIMEOUT_IN_MS = 30000
 export const DEFAULT_HEADERS = {
 	Accept: 'application/json',
 	'Content-type': 'application/json',
-	'Access-Control-Allow-Origin': '*',
 }
 
 export const apiWithConfig = axios.create({

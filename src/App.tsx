@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { api } from './api/api'
 import './App.css'
 import { GenericAccountType } from './types/Account'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { RoutesComponent } from './router/Routes/'
 
 function App() {
 	const [users, setUsers] = useState<GenericAccountType[]>()
@@ -24,10 +26,9 @@ function App() {
 	}, [])
 
 	return (
-		<div className="App">
-			{loading && <p>Loading...</p>}
-			{!loading && !!users && users.map((user, index) => <p key={index}>{JSON.stringify(user)}</p>)}
-		</div>
+		<Router>
+			<RoutesComponent />
+		</Router>
 	)
 }
 
