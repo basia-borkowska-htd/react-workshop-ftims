@@ -1,5 +1,4 @@
 export type RouteType = {
-	component: () => JSX.Element
+	Component: () => JSX.Element
 	path: string
-	exact?: boolean
 }

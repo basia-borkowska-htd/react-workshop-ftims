@@ -7,29 +7,29 @@ import { Pathnames } from './pathnames'
 
 export const adminRoutes: RouteType[] = [
 	{
+		path: Pathnames.admin.home,
+		Component: HomePageComponent,
+	},
+	{
 		path: Pathnames.admin.accounts,
-		component: AccountsPageComponent,
-		exact: true,
+		Component: AccountsPageComponent,
 	},
 	{
 		path: Pathnames.admin.accountDetails,
-		component: AccountDetailsPageComponent,
-		exact: true,
+		Component: AccountDetailsPageComponent,
 	},
 ]
 
 export const userRoutes: RouteType[] = [
 	{
 		path: Pathnames.user.home,
-		component: HomePageComponent,
-		exact: true,
+		Component: HomePageComponent,
 	},
 ]
 
 export const publicRoutes: RouteType[] = [
 	{
 		path: Pathnames.public.login,
-		component: LoginPageComponent,
-		exact: true,
+		Component: LoginPageComponent,
 	},
 ]
