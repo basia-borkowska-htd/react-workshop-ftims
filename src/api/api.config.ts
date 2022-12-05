@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { TOKEN } from '../constants'
 
 export const API_URL = process.env.REACT_APP_API_URL
 export const TIMEOUT_IN_MS = 30000
@@ -14,8 +15,8 @@ export const apiWithConfig = axios.create({
 })
 
 apiWithConfig.interceptors.request.use((config) => {
-	const token = window.localStorage.getItem('token')
-	if (token && config.headers) config.headers.Authorization = `Bearer ${token}`
+	const token = localStorage.getItem(TOKEN)
+	if (token && config.headers) config.headers.Authorization = JSON.parse(token)
 	return config
 })
 
