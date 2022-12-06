@@ -17,11 +17,14 @@ export const useAccount = () => {
 		}
 	}
 
-	const getCurrentAccount = (token: string) => {
-		console.log(token)
+	const getCurrentAccount = async () => {
+		try {
+			const { data } = await api.getCurrentAccount()
+			setAccount(data)
+		} catch {
+			alert('Unable to get current account!')
+		}
 	}
-
-
 
 	return { isAuthenticated, isAdmin, logIn, getCurrentAccount }
 }
