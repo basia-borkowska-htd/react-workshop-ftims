@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { TOKEN } from '../constants'
+import { Pathnames } from '../router/pathnames'
 
 export const API_URL = process.env.REACT_APP_API_URL
 export const TIMEOUT_IN_MS = 30000
@@ -23,6 +24,10 @@ apiWithConfig.interceptors.request.use((config) => {
 apiWithConfig.interceptors.response.use(
 	(response) => response,
 	(error) => {
+		const status = error.response?.status
+		if (status === 401 || status === 403) {
+			window.location.href = Pathnames.public.logout
+		}
 		return Promise.reject(error)
 	},
 )

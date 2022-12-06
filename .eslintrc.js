@@ -19,6 +19,7 @@ module.exports = {
 		indent: ['error', 'tab'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'never'],
-		"react/react-in-jsx-scope": "off"
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/no-extra-semi": 'off'
 	},
 }

@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 import { Pathnames } from '../../../router/pathnames'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -12,10 +12,7 @@ export const AdminLayout = ({ children }: UserLayoutProps) => {
 	const { pathname } = useLocation()
 
 	const getPageName = () => {
-		if (pathname.includes(Pathnames.admin.accounts)) {
-			return 'Accounts'
-		}
-
+		if (pathname.includes(Pathnames.admin.accounts)) return 'Accounts'
 		return 'Account Details'
 	}
 
@@ -26,9 +23,17 @@ export const AdminLayout = ({ children }: UserLayoutProps) => {
 					<Typography variant="h4" sx={{ mx: 2 }}>
 						{getPageName()}
 					</Typography>
-					<Button onClick={() => navigate(Pathnames.user.home)} sx={{ my: 2, color: 'white' }}>
-						Go to Home
-					</Button>
+					<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Button onClick={() => navigate(Pathnames.user.home)} sx={{ my: 2, color: 'white' }}>
+							Go to Home
+						</Button>
+						<Button
+							onClick={() => navigate(Pathnames.public.logout)}
+							sx={{ my: 2, color: 'white' }}
+						>
+							Logout
+						</Button>
+					</Box>
 				</Toolbar>
 			</AppBar>
 

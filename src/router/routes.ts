@@ -1,6 +1,7 @@
 import { AccountDetailsPageComponent } from '../pages/admin/AccountDetailsPage'
 import { AccountsPageComponent } from '../pages/admin/AccountsPage'
 import { LoginPageComponent } from '../pages/public/LoginPage'
+import { LogoutPageComponent } from '../pages/public/LogoutPage'
 import { HomePageComponent } from '../pages/user/HomePage'
 import { RouteType } from '../types/Route'
 import { Pathnames } from './pathnames'
@@ -27,5 +28,9 @@ export const publicRoutes: RouteType[] = [
 	{
 		path: Pathnames.public.login,
 		Component: LoginPageComponent,
+	},
+	{
+		path: Pathnames.public.logout,
+		Component: LogoutPageComponent,
 	},
 ]

@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 import { Pathnames } from '../../../router/pathnames'
 import { useNavigate } from 'react-router-dom'
@@ -19,14 +19,22 @@ export const UserLayout = ({ children }: UserLayoutProps) => {
 					<Typography variant="h4" sx={{ mx: 2 }}>
 						HOME
 					</Typography>
-					{isAdmin && (
+					<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						{isAdmin && (
+							<Button
+								onClick={() => navigate(Pathnames.admin.accounts)}
+								sx={{ my: 2, color: 'white', display: 'block' }}
+							>
+								Go to Admin Panel
+							</Button>
+						)}
 						<Button
-							onClick={() => navigate(Pathnames.admin.accounts)}
-							sx={{ my: 2, color: 'white', display: 'block' }}
+							onClick={() => navigate(Pathnames.public.logout)}
+							sx={{ my: 2, color: 'white' }}
 						>
-							Go to Admin Panel
+							Logout
 						</Button>
-					)}
+					</Box>
 				</Toolbar>
 			</AppBar>
 
