@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { PublicLayout } from '../../components/layouts/PublicLayout'
 import { useAccount } from '../../hooks/useAccount'
 import { Pathnames } from '../pathnames'
 import { adminRoutes, publicRoutes, userRoutes } from '../routes'
@@ -9,7 +10,15 @@ export const RoutesComponent = () => {
 	return (
 		<Routes>
 			{publicRoutes.map(({ path, Component }) => (
-				<Route key={path} path={path} element={<Component />} />
+				<Route
+					key={path}
+					path={path}
+					element={
+						<PublicLayout>
+							<Component />
+						</PublicLayout>
+					}
+				/>
 			))}
 
 			{isAuthenticated &&
