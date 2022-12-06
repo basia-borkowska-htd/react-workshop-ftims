@@ -1,3 +1,3 @@
-import { PublicLayout } from './PublicLayout.styles'
+import { PublicLayout } from './styles'
 
 export { PublicLayout }
