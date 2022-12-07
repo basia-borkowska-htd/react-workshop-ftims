@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { api } from './api/api'
 import './App.css'
-import { GenericUserType } from './types/Account'
+import { AccountType } from './types/Account'
 
-function App() {
-	const [users, setUsers] = useState<GenericUserType[]>()
+export const App = () => {
+	const [user, setUser] = useState<AccountType>()
 	const [loading, setLoading] = useState(true)
 
-	const getAccounts = async () => {
+	const logIn = async () => {
 		setLoading(true)
 		try {
-			const { data } = await api.getAccounts()
-			setUsers(data)
+			const { data } = await api.logIn('MichalAdmin', 'P@ssw0rd!')
+			setUser(data)
 		} catch (error) {
 			console.log({ error })
 		} finally {
@@ -20,34 +20,13 @@ function App() {
 	}
 
 	useEffect(() => {
-		getAccounts()
+		logIn()
 	}, [])
-	// useEffect(() => {
-	// 	fetch('http://localhost:8080/test/api/accounts', {
-	// 		method: 'GET',
-	// 		mode: 'no-cors',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then(
-	// 			(result) => {
-	// 				setLoading(true)
-	// 				setData(result)
-	// 			},
-	// 			(error) => {
-	// 				setLoading(true)
-	// 				setError(error)
-	// 			},
-	// 		)
-	// }, [])
+
 	return (
 		<div className="App">
 			{loading && <p>Loading...</p>}
-			{!loading && !!users && users.map((user, index) => <p key={index}>{JSON.stringify(user)}</p>)}
+			{!loading && !!user && <p>{JSON.stringify(user)}</p>}
 		</div>
 	)
 }
-
-export default App
