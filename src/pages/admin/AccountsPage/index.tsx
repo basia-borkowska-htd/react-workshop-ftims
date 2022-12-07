@@ -8,8 +8,10 @@ import {
 	Paper,
 } from '@mui/material'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { LoaderComponent } from '../../../components/Loader'
 import { useAccounts } from '../../../hooks/useAccounts'
+import { Pathnames } from '../../../router/pathnames'
 
 export const AccountsPageComponent = () => {
 	const { accounts, isFetching, fetchAccounts } = useAccounts()
@@ -34,6 +36,7 @@ export const AccountsPageComponent = () => {
 						<TableCell>Login</TableCell>
 						<TableCell align="right">Email Address</TableCell>
 						<TableCell align="right">Account Type</TableCell>
+						<TableCell />
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -44,6 +47,9 @@ export const AccountsPageComponent = () => {
 							</TableCell>
 							<TableCell align="right">{email}</TableCell>
 							<TableCell align="right">{accountType}</TableCell>
+							<TableCell>
+								<Link to={Pathnames.admin.accountDetails.replace(':login', login)}>Details</Link>
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
