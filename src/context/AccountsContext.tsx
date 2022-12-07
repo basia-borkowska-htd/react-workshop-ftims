@@ -4,15 +4,15 @@ import { AccountType } from '../types/Account'
 interface AccountsState {
 	isFetching: boolean
 	setIsFetching: (isFetching: boolean) => void
-	accounts: AccountType[]
-	setAccounts: (item: AccountType[]) => void
+	accounts: AccountType[] | null
+	setAccounts: (item: AccountType[] | null) => void
 }
 
 export const AccountsStateContext = createContext<AccountsState | null>(null)
 
 export const AccountsStateContextProvider = ({ children }: { children: ReactNode }) => {
 	const [isFetching, setIsFetching] = useState(false)
-	const [accounts, setAccounts] = useState<AccountType[]>([])
+	const [accounts, setAccounts] = useState<AccountType[] | null>(null)
 
 	return (
 		<AccountsStateContext.Provider value={{ isFetching, setIsFetching, accounts, setAccounts }}>

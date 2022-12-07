@@ -1,8 +1,12 @@
 import { CircularProgress } from '@mui/material'
 import { LoaderWrapper } from './styles'
 
-export const LoaderComponent = () => (
-	<LoaderWrapper>
+interface LoaderProps {
+	small?: boolean
+}
+
+export const LoaderComponent = ({ small = false }: LoaderProps) => (
+	<LoaderWrapper isSmall={small}>
 		<CircularProgress />
 	</LoaderWrapper>
 )
