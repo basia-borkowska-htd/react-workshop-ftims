@@ -38,7 +38,11 @@ export const AccountsPageComponent = () => {
 				</TableHead>
 				<TableBody>
 					{accounts.map(({ id, email, login, accountType }) => (
-						<TableRow key={id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+						<TableRow
+							key={id}
+							sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+							onClick={() => alert(email)}
+						>
 							<TableCell component="th" scope="row">
 								{login}
 							</TableCell>
