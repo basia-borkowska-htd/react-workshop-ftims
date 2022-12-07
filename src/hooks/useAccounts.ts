@@ -8,8 +8,8 @@ export const useAccounts = () => {
 
 	const fetchAccounts = async () => {
 		try {
-			if (isFetching) return
 			setIsFetching(true)
+			setAccounts(null)
 			const { data } = await api.getAccounts()
 			setAccounts(data)
 		} catch {
