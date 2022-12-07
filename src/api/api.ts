@@ -1,4 +1,4 @@
-import { AccountType, GenericAccountType } from '../types/Account'
+import { AccountType } from '../types/Account'
 import { ApiResponseType } from '../types/ApiResponse'
 import { apiWithConfig } from './api.config'
 
@@ -12,20 +12,17 @@ export const api = {
 	getCurrentAccount: (): ApiResponseType<AccountType> => {
 		return apiWithConfig.get('/accounts/existing_account')
 	},
-	getAccounts: (): ApiResponseType<GenericAccountType[]> => {
+	getAccounts: (): ApiResponseType<AccountType[]> => {
 		return apiWithConfig.get('/accounts')
 	},
-	getAccount: (login: string): ApiResponseType<GenericAccountType> => {
+	getAccount: (login: string): ApiResponseType<AccountType> => {
 		return apiWithConfig.get(`/accounts/${login}`)
 	},
-	createAccount: (login: string): ApiResponseType<GenericAccountType> => {
+	createAccount: (login: string): ApiResponseType<AccountType> => {
 		return apiWithConfig.post('/accounts', { login })
 	},
-	updateAccount: (
-		login: string,
-		model: GenericAccountType,
-	): ApiResponseType<GenericAccountType> => {
-		return apiWithConfig.post(`/accounts/${login}`, { model })
+	updateAccount: (login: string, model: AccountType): ApiResponseType<AccountType> => {
+		return apiWithConfig.put(`/accounts/${login}`, { model })
 	},
 	deleteAccount: (login: string) => {
 		return apiWithConfig.delete(`/accounts/${login}`)
