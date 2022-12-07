@@ -11,8 +11,9 @@ import {
 	Badge as BadgeIcon,
 	Key as KeyIcon,
 } from '@mui/icons-material'
+import { AccountDetailsStateContextProvider } from '../../../context/AccountDetailsContext'
 
-export const AccountDetailsPageComponent = () => {
+const AccountDetailsPage = () => {
 	const { login } = useParams<{ login: string }>()
 	const { account, isFetching, getAccountDetails } = useAccountDetails()
 	const { isAdmin } = useAccount()
@@ -69,3 +70,9 @@ export const AccountDetailsPageComponent = () => {
 		</List>
 	)
 }
+
+export const AccountDetailsPageComponent = () => (
+	<AccountDetailsStateContextProvider>
+		<AccountDetailsPage />
+	</AccountDetailsStateContextProvider>
+)
