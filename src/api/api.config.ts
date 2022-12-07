@@ -5,7 +5,6 @@ export const TIMEOUT_IN_MS = 30000
 export const DEFAULT_HEADERS = {
 	Accept: 'application/json',
 	'Content-type': 'application/json',
-	'Access-Control-Allow-Origin': '*',
 }
 
 export const apiWithConfig = axios.create({
@@ -16,7 +15,7 @@ export const apiWithConfig = axios.create({
 
 apiWithConfig.interceptors.request.use((config) => {
 	const token = window.localStorage.getItem('token')
-	if (token && config.headers) config.headers.Authorization = `Bearer ${token}`
+	if (token && config.headers) config.headers.Authorization = token
 	return config
 })
 

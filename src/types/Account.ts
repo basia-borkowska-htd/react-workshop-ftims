@@ -1,19 +1,19 @@
 import { AccountTypeEnum } from '../enums/AccountType.enum'
 
-type AccountType = {
+export interface AccountType extends UserAccountType, AdminAccountType {
 	id: string
 	email: string
 	login: string
+	firstName: string
+	lastName: string
 	password: string
 	accountType: AccountTypeEnum
 }
 
-export interface UserAccountType extends AccountType {
+export interface UserAccountType {
 	NIP: string
 }
 
-export interface AdminAccountType extends AccountType {
+export interface AdminAccountType {
 	phone: string
 }
-
-export type GenericUserType = UserAccountType | AdminAccountType
