@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { PublicLayout } from '../../components/layouts/PublicLayout'
 import { useAccount } from '../../hooks/useAccount'
@@ -5,7 +6,17 @@ import { Pathnames } from '../pathnames'
 import { adminRoutes, publicRoutes, userRoutes } from '../routes'
 
 export const RoutesComponent = () => {
-	const { isAuthenticated, isAdmin } = useAccount()
+	const { account, isAuthenticated, isAdmin, isFetching, getCurrentAccount } = useAccount()
+
+	useEffect(() => {
+		if (!account) {
+			getCurrentAccount()
+		}
+	}, [])
+
+	if (isFetching) {
+		return <div>Loading</div>
+	}
 
 	return (
 		<Routes>
