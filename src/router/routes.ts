@@ -7,10 +7,6 @@ import { Pathnames } from './pathnames'
 
 export const adminRoutes: RouteType[] = [
 	{
-		path: Pathnames.admin.home,
-		Component: HomePageComponent,
-	},
-	{
 		path: Pathnames.admin.accounts,
 		Component: AccountsPageComponent,
 	},
