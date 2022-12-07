@@ -17,4 +17,4 @@ export interface AdminAccountType extends AccountType {
 	phone?: string
 }
 
-export type GenericAccountType = UserAccountType | AdminAccountType
+export interface GenericAccountType extends UserAccountType, AdminAccountType {}

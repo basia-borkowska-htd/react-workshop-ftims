@@ -8,6 +8,6 @@ export const Pathnames = {
 	},
 	admin: {
 		accounts: '/accounts',
-		accountDetails: '/account/:login',
+		accountDetails: '/accounts/:login',
 	},
 }
