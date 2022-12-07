@@ -7,9 +7,7 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormContainer } from './styles'
-import { useEffect } from 'react'
 import { LoaderComponent } from '../../../components/Loader'
-import { TOKEN } from '../../../constants'
 
 const schema = yup.object({
 	login: yup.string().required('Login is required').min(2, 'Must be at least 2 characters'),
@@ -19,7 +17,7 @@ const schema = yup.object({
 type LoginFormType = yup.InferType<typeof schema>
 
 export const LoginPageComponent = () => {
-	const { isLoggingIn, isAuthenticated, logIn, getCurrentAccount } = useAccount()
+	const { isLoggingIn, isAuthenticated, logIn } = useAccount()
 
 	const {
 		register,
@@ -32,12 +30,6 @@ export const LoginPageComponent = () => {
 	const onSubmit = handleSubmit(({ login, password }) => {
 		logIn(login, password)
 	})
-
-	useEffect(() => {
-		if (!isAuthenticated && !!localStorage.getItem(TOKEN)) {
-			getCurrentAccount()
-		}
-	}, [])
 
 	if (isLoggingIn) {
 		return <LoaderComponent />
