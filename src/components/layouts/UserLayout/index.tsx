@@ -10,7 +10,7 @@ interface UserLayoutProps {
 
 export const UserLayout = ({ children }: UserLayoutProps) => {
 	const navigate = useNavigate()
-	const { isAdmin } = useAccount()
+	const { isAdmin, logOut } = useAccount()
 
 	return (
 		<div>
@@ -28,10 +28,7 @@ export const UserLayout = ({ children }: UserLayoutProps) => {
 								Go to Admin Panel
 							</Button>
 						)}
-						<Button
-							onClick={() => navigate(Pathnames.public.logout)}
-							sx={{ my: 2, color: 'white' }}
-						>
+						<Button onClick={logOut} sx={{ my: 2, color: 'white' }}>
 							Logout
 						</Button>
 					</Box>
