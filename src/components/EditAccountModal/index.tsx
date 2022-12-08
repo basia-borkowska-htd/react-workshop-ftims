@@ -50,9 +50,10 @@ export const EditAccountModalComponent = ({
 			open={open}
 			handleClose={handleClose}
 			handleConfirm={onSubmit}
+			diasbleButtons={isUpdating}
 		>
 			{isUpdating ? (
-				<LoaderComponent />
+				<LoaderComponent small />
 			) : (
 				<FormContainer>
 					<form onSubmit={onSubmit}>

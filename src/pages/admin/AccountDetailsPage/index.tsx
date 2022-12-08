@@ -1,7 +1,7 @@
 import { ListItemText, ListItem, Divider, Button } from '@mui/material'
 import { useAccountDetails } from '../../../hooks/useAccountDetails'
-import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { LoaderComponent } from '../../../components/Loader'
 import {
 	Face as FaceIcon,
@@ -16,10 +16,23 @@ import {
 import { AccountDetailsStateContextProvider } from '../../../context/AccountDetailsContext'
 import { ButtonsContainer, DetailIcon, ListContainer, StyledList } from './styles'
 import { AccountTypeEnum } from '../../../enums/AccountType.enum'
+import { EditAccountModalComponent } from '../../../components/EditAccountModal'
+import { Pathnames } from '../../../router/pathnames'
 
 const AccountDetailsPage = () => {
 	const { login } = useParams<{ login: string }>()
 	const { account, isFetching, getAccountDetails } = useAccountDetails()
+
+	const [isModalOpen, setIsModalOpen] = useState(false)
+
+	const openModal = () => {
+		setIsModalOpen(true)
+	}
+
+	const closeModal = () => {
+		setIsModalOpen(false)
+		if (login) getAccountDetails(login)
+	}
 
 	useEffect(() => {
 		if (login) getAccountDetails(login)
@@ -36,22 +49,22 @@ const AccountDetailsPage = () => {
 	return (
 		<>
 			<ButtonsContainer>
-				<Button
-					variant="outlined"
-					color="error"
-					startIcon={<DeleteIcon />}
-					onClick={() => alert('Not implemented yet.')}
-				>
-					Delete
-				</Button>
-				<Button
-					variant="contained"
-					startIcon={<EditIcon />}
-					onClick={() => alert('Not implemented yet.')}
-				>
-					Edit
-				</Button>
+				<Link to={Pathnames.admin.accounts}>{'< BACK'}</Link>
+				<div>
+					<Button
+						variant="outlined"
+						color="error"
+						startIcon={<DeleteIcon />}
+						onClick={() => alert('Not implemented yet.')}
+					>
+						Delete
+					</Button>
+					<Button variant="contained" startIcon={<EditIcon />} onClick={openModal}>
+						Edit
+					</Button>
+				</div>
 			</ButtonsContainer>
+
 			<ListContainer>
 				<StyledList>
 					<ListItem>
@@ -106,6 +119,8 @@ const AccountDetailsPage = () => {
 					</ListItem>
 				</StyledList>
 			</ListContainer>
+
+			<EditAccountModalComponent account={account} open={isModalOpen} handleClose={closeModal} />
 		</>
 	)
 }

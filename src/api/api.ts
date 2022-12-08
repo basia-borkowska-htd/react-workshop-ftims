@@ -22,7 +22,7 @@ export const api = {
 		return apiWithConfig.post('/accounts', { login })
 	},
 	updateAccount: (login: string, model: AccountType): ApiResponseType<AccountType> => {
-		return apiWithConfig.put(`/accounts/${login}`, { model })
+		return apiWithConfig.put(`/accounts/${login}`, { ...model })
 	},
 	deleteAccount: (login: string) => {
 		return apiWithConfig.delete(`/accounts/${login}`)
