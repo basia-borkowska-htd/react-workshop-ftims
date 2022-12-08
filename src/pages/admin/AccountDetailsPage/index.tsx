@@ -1,22 +1,25 @@
-import { ListItemText, ListItem, List, Divider } from '@mui/material'
+import { ListItemText, ListItem, Divider, Button } from '@mui/material'
 import { useAccountDetails } from '../../../hooks/useAccountDetails'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { LoaderComponent } from '../../../components/Loader'
-import { useAccount } from '../../../hooks/useAccount'
 import {
 	Face as FaceIcon,
 	Email as EmailIcon,
 	LocalPhone as LocalPhoneIcon,
-	Badge as BadgeIcon,
 	Key as KeyIcon,
+	Delete as DeleteIcon,
+	Edit as EditIcon,
+	Badge as BadgeIcon,
+	Numbers as NumbersIcon,
 } from '@mui/icons-material'
 import { AccountDetailsStateContextProvider } from '../../../context/AccountDetailsContext'
+import { ButtonsContainer, DetailIcon, ListContainer, StyledList } from './styles'
+import { AccountTypeEnum } from '../../../enums/AccountType.enum'
 
 const AccountDetailsPage = () => {
 	const { login } = useParams<{ login: string }>()
 	const { account, isFetching, getAccountDetails } = useAccountDetails()
-	const { isAdmin } = useAccount()
 
 	useEffect(() => {
 		if (login) getAccountDetails(login)
@@ -31,43 +34,79 @@ const AccountDetailsPage = () => {
 	}
 
 	return (
-		<List
-			sx={{
-				width: '100%',
-				maxWidth: 360,
-				bgcolor: 'background.paper',
-			}}
-		>
-			<ListItem>
-				<FaceIcon />
-				<ListItemText primary="Login" secondary={account.login} />
-			</ListItem>
-			<Divider variant="inset" component="li" />
+		<>
+			<ButtonsContainer>
+				<Button
+					variant="outlined"
+					color="error"
+					startIcon={<DeleteIcon />}
+					onClick={() => alert('Not implemented yet.')}
+				>
+					Delete
+				</Button>
+				<Button
+					variant="contained"
+					startIcon={<EditIcon />}
+					onClick={() => alert('Not implemented yet.')}
+				>
+					Edit
+				</Button>
+			</ButtonsContainer>
+			<ListContainer>
+				<StyledList>
+					<ListItem>
+						<DetailIcon>
+							<BadgeIcon />
+						</DetailIcon>
+						<ListItemText
+							primary="Name and surname"
+							secondary={account.firstName + ' ' + account.lastName || '-'}
+						/>
+					</ListItem>
+					<Divider variant="fullWidth" component="li" />
 
-			<ListItem>
-				<EmailIcon />
-				<ListItemText primary="Email" secondary={account.email} />
-			</ListItem>
-			<Divider variant="inset" component="li" />
+					<ListItem>
+						<DetailIcon>
+							<FaceIcon />
+						</DetailIcon>
+						<ListItemText primary="Login" secondary={account.login || '-'} />
+					</ListItem>
+					<Divider variant="fullWidth" component="li" />
 
-			{isAdmin ? (
-				<ListItem>
-					<LocalPhoneIcon />
-					<ListItemText primary="Phone number" secondary={account.phone} />
-				</ListItem>
-			) : (
-				<ListItem>
-					<BadgeIcon />
-					<ListItemText primary="NIP" secondary={account.NIP} />
-				</ListItem>
-			)}
+					<ListItem>
+						<DetailIcon>
+							<EmailIcon />
+						</DetailIcon>
+						<ListItemText primary="Email" secondary={account.email || '-'} />
+					</ListItem>
+					<Divider variant="fullWidth" component="li" />
 
-			<Divider variant="inset" component="li" />
-			<ListItem>
-				<KeyIcon />
-				<ListItemText primary="Account type" secondary={account.accountType} />
-			</ListItem>
-		</List>
+					{account.accountType === AccountTypeEnum.ADMIN ? (
+						<ListItem>
+							<DetailIcon>
+								<LocalPhoneIcon />
+							</DetailIcon>
+							<ListItemText primary="Phone number" secondary={account.phone || '-'} />
+						</ListItem>
+					) : (
+						<ListItem>
+							<DetailIcon>
+								<NumbersIcon />
+							</DetailIcon>
+							<ListItemText primary="NIP" secondary={account.NIP || '-'} />
+						</ListItem>
+					)}
+
+					<Divider variant="fullWidth" component="li" />
+					<ListItem>
+						<DetailIcon>
+							<KeyIcon />
+						</DetailIcon>
+						<ListItemText primary="Account type" secondary={account.accountType || '-'} />
+					</ListItem>
+				</StyledList>
+			</ListContainer>
+		</>
 	)
 }
 
