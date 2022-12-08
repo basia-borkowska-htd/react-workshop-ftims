@@ -23,14 +23,14 @@ const AccountDetailsPage = () => {
 	const { login } = useParams<{ login: string }>()
 	const { account, isFetching, getAccountDetails } = useAccountDetails()
 
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-	const openModal = () => {
-		setIsModalOpen(true)
+	const openEditModal = () => {
+		setIsEditModalOpen(true)
 	}
 
-	const closeModal = () => {
-		setIsModalOpen(false)
+	const closeEditModal = () => {
+		setIsEditModalOpen(false)
 		if (login) getAccountDetails(login)
 	}
 
@@ -43,7 +43,7 @@ const AccountDetailsPage = () => {
 	}
 
 	if (!account) {
-		return <div>There is no results</div>
+		return <div>No results</div>
 	}
 
 	return (
@@ -59,7 +59,7 @@ const AccountDetailsPage = () => {
 					>
 						Delete
 					</Button>
-					<Button variant="contained" startIcon={<EditIcon />} onClick={openModal}>
+					<Button variant="contained" startIcon={<EditIcon />} onClick={openEditModal}>
 						Edit
 					</Button>
 				</div>
@@ -120,7 +120,11 @@ const AccountDetailsPage = () => {
 				</StyledList>
 			</ListContainer>
 
-			<EditAccountModalComponent account={account} open={isModalOpen} handleClose={closeModal} />
+			<EditAccountModalComponent
+				account={account}
+				open={isEditModalOpen}
+				handleClose={closeEditModal}
+			/>
 		</>
 	)
 }
