@@ -39,7 +39,7 @@ export const AccountsPageComponent = () => {
 
 	const renderTable = () => {
 		if (!accounts || accounts.length === 0) {
-			return <div>There is no any results</div>
+			return <div>No results</div>
 		}
 
 		return (

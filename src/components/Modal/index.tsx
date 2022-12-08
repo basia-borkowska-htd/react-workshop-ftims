@@ -6,7 +6,7 @@ export interface ModalProps {
 	title?: string
 	open: boolean
 	diasbleButtons?: boolean
-	handleConfirm?: () => void
+	handleConfirm: () => void
 	handleClose: () => void
 	children: ReactElement
 }
@@ -33,13 +33,11 @@ export const ModalComponent = ({
 			)}
 			<ModalBody>{children}</ModalBody>
 			<ModalFooter>
-				{handleConfirm && (
-					<Button variant="contained" onClick={handleConfirm} disabled={diasbleButtons}>
-						Confirm
-					</Button>
-				)}
 				<Button variant="outlined" onClick={handleClose} disabled={diasbleButtons} color="error">
 					Close
+				</Button>
+				<Button variant="contained" onClick={handleConfirm} disabled={diasbleButtons}>
+					Confirm
 				</Button>
 			</ModalFooter>
 		</ModalContent>
