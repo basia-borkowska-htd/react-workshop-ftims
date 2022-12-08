@@ -5,7 +5,7 @@ import { ModalBody, ModalContent, ModalFooter, ModalHeader } from './styles'
 interface ModalProps {
 	title?: string
 	open: boolean
-	handleConfirm?: () => void
+	handleConfirm: () => void
 	handleClose: () => void
 	children: ReactElement
 }
@@ -32,13 +32,11 @@ export const ModalComponent = ({
 				)}
 				<ModalBody>{children}</ModalBody>
 				<ModalFooter>
-					{handleConfirm && (
-						<Button variant="contained" onClick={handleConfirm}>
-							Confirm
-						</Button>
-					)}
 					<Button variant="outlined" onClick={handleClose} color="error">
 						Close
+					</Button>
+					<Button variant="contained" onClick={handleConfirm}>
+						Confirm
 					</Button>
 				</ModalFooter>
 			</ModalContent>
