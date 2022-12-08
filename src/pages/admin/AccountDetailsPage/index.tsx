@@ -30,7 +30,7 @@ const AccountDetailsPage = () => {
 	}
 
 	if (!account) {
-		return <div>There is no results</div>
+		return <div>No results</div>
 	}
 
 	return (
