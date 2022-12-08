@@ -32,5 +32,11 @@ export const useAccountDetails = () => {
 		}
 	}
 
-	return { account, isFetching, getAccountDetails, isUpdating, updateAccount }
+	return {
+		account,
+		isFetching,
+		getAccountDetails,
+		isUpdating,
+		updateAccount,
+	}
 }

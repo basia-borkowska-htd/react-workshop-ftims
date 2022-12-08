@@ -1,7 +1,7 @@
 import { AccountTypeEnum } from '../enums/AccountType.enum'
 
 export interface AccountType extends UserAccountType, AdminAccountType {
-	id: string
+	id?: string
 	email: string
 	login: string
 	firstName: string

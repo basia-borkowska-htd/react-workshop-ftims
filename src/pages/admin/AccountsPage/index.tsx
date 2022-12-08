@@ -8,15 +8,28 @@ import {
 	Paper,
 	Button,
 } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CreateAccountModalComponent } from '../../../components/CreateAccountModal'
 import { LoaderComponent } from '../../../components/Loader'
 import { useAccounts } from '../../../hooks/useAccounts'
 import { Pathnames } from '../../../router/pathnames'
+import { ButtonsContainer } from './styles'
 
 export const AccountsPageComponent = () => {
 	const navigate = useNavigate()
 	const { accounts, isFetching, fetchAccounts } = useAccounts()
+
+	const [isModalOpen, setIsModalOpen] = useState(false)
+
+	const openModal = () => {
+		setIsModalOpen(true)
+	}
+
+	const closeModal = () => {
+		setIsModalOpen(false)
+		fetchAccounts()
+	}
 
 	useEffect(() => {
 		if (!accounts) {
@@ -77,13 +90,21 @@ export const AccountsPageComponent = () => {
 
 	return (
 		<div>
-			<Button onClick={fetchAccounts} disabled={isFetching} sx={{ my: 2 }}>
-				Reload
-			</Button>
+			<ButtonsContainer>
+				<Button onClick={fetchAccounts} disabled={isFetching} sx={{ my: 2 }}>
+					Reload
+				</Button>
+
+				<Button onClick={openModal} variant="contained" sx={{ my: 2 }}>
+					Create new
+				</Button>
+			</ButtonsContainer>
 
 			<TableContainer component={Paper}>
 				{isFetching ? <LoaderComponent small /> : renderTable()}
 			</TableContainer>
+
+			<CreateAccountModalComponent open={isModalOpen} handleClose={closeModal} />
 		</div>
 	)
 }
