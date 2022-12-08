@@ -26,21 +26,25 @@ export const AccountsPageComponent = () => {
 
 	const renderTable = () => {
 		if (!accounts || accounts.length === 0) {
-			return <div>There is no any results</div>
+			return <div>No results</div>
 		}
 
 		return (
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
 				<TableHead>
 					<TableRow>
+						<TableCell>Name</TableCell>
+						<TableCell>Last Name</TableCell>
 						<TableCell>Login</TableCell>
+						<TableCell>NIP</TableCell>
+						<TableCell>Phone number</TableCell>
 						<TableCell align="right">Email Address</TableCell>
 						<TableCell align="right">Account Type</TableCell>
 					</TableRow>
 				</TableHead>
 
 				<TableBody>
-					{accounts.map(({ id, email, login, accountType }) => (
+					{accounts.map(({ id, email, login, firstName, lastName, NIP, phone, accountType }) => (
 						<TableRow
 							key={id}
 							hover
@@ -48,7 +52,19 @@ export const AccountsPageComponent = () => {
 							sx={{ cursor: 'pointer' }}
 						>
 							<TableCell component="th" scope="row">
+								{firstName}
+							</TableCell>
+							<TableCell component="th" scope="row">
+								{lastName}
+							</TableCell>
+							<TableCell component="th" scope="row">
 								{login}
+							</TableCell>
+							<TableCell component="th" scope="row">
+								{NIP || '-'}
+							</TableCell>
+							<TableCell component="th" scope="row">
+								{phone || '-'}
 							</TableCell>
 							<TableCell align="right">{email}</TableCell>
 							<TableCell align="right">{accountType}</TableCell>
