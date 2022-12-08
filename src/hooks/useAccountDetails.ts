@@ -32,11 +32,23 @@ export const useAccountDetails = () => {
 		}
 	}
 
+	const deleteAccount = async (login: string) => {
+		try {
+			setIsUpdating(true)
+			await api.deleteAccount(login)
+		} catch {
+			showErrorAlert('Unable to remove account')
+		} finally {
+			setIsUpdating(false)
+		}
+	}
+
 	return {
 		account,
 		isFetching,
 		getAccountDetails,
 		isUpdating,
 		updateAccount,
+		deleteAccount,
 	}
 }
