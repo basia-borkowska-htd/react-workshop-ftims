@@ -1,17 +1,12 @@
 import { AccountType } from '../../types/Account'
 import { ModalComponent, ModalProps } from '../Modal'
-import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useAccountDetails } from '../../hooks/useAccountDetails'
-import { FormHelperText, TextField } from '@mui/material'
-import { LoaderComponent } from '../Loader'
 
-interface DeleteAccountModalProps extends Omit<ModalProps, 'children'> {
+interface DeleteAccountModalProps extends Omit<ModalProps, 'children' | 'handleConfirm'> {
 	account: AccountType
 }
 
-export const EditAccountModalComponent = ({
+export const DeleteAccountModalComponent = ({
 	account,
 	open,
 	handleClose,

@@ -21,7 +21,6 @@ export const ModalHeader = styled.div`
 
 export const ModalBody = styled.div`
 	padding: 1.25rem;
-	min-height: 15rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

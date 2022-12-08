@@ -1,6 +1,6 @@
 import { ListItemText, ListItem, Divider, Button } from '@mui/material'
 import { useAccountDetails } from '../../../hooks/useAccountDetails'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { LoaderComponent } from '../../../components/Loader'
 import {
@@ -18,20 +18,29 @@ import { ButtonsContainer, DetailIcon, ListContainer, StyledList } from './style
 import { AccountTypeEnum } from '../../../enums/AccountType.enum'
 import { EditAccountModalComponent } from '../../../components/EditAccountModal'
 import { Pathnames } from '../../../router/pathnames'
+import { DeleteAccountModalComponent } from '../../../components/DeleteAccountModal'
 
 const AccountDetailsPage = () => {
 	const { login } = useParams<{ login: string }>()
+	const navigate = useNavigate()
 	const { account, isFetching, getAccountDetails } = useAccountDetails()
 
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-
 	const openEditModal = () => {
 		setIsEditModalOpen(true)
 	}
-
 	const closeEditModal = () => {
 		setIsEditModalOpen(false)
 		if (login) getAccountDetails(login)
+	}
+
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+	const openDeleteModal = () => {
+		setIsDeleteModalOpen(true)
+	}
+	const closeDeleteModal = () => {
+		setIsDeleteModalOpen(false)
+		navigate(Pathnames.admin.accounts)
 	}
 
 	useEffect(() => {
@@ -55,7 +64,7 @@ const AccountDetailsPage = () => {
 						variant="outlined"
 						color="error"
 						startIcon={<DeleteIcon />}
-						onClick={() => alert('Not implemented yet.')}
+						onClick={openDeleteModal}
 					>
 						Delete
 					</Button>
@@ -124,6 +133,11 @@ const AccountDetailsPage = () => {
 				account={account}
 				open={isEditModalOpen}
 				handleClose={closeEditModal}
+			/>
+			<DeleteAccountModalComponent
+				account={account}
+				open={isDeleteModalOpen}
+				handleClose={closeDeleteModal}
 			/>
 		</>
 	)
