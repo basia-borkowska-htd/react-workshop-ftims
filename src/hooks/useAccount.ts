@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { api } from '../api/api'
 import { TOKEN } from '../constants'
 import { useAccountState } from '../context/AccountContext'
@@ -7,13 +7,27 @@ import { Pathnames } from '../router/pathnames'
 import { useAlert } from './useAlert'
 
 export const useAccount = () => {
+	const navigate = useNavigate()
 	const { account, setAccount, isLoggingIn, setIsLoggingIn, isFetching, setIsFetching } =
 		useAccountState()
 	const { showErrorAlert } = useAlert()
-	const navigate = useNavigate()
 
 	const isAuthenticated = !!account?.login
 	const isAdmin = account?.accountType === AccountTypeEnum.ADMIN
+
+	const logOut = async () => {
+		try {
+			setIsFetching(true)
+			await api.logOut()
+		} catch {
+			showErrorAlert('Logout failure!')
+		} finally {
+			localStorage.removeItem(TOKEN)
+			setAccount(null)
+			navigate(Pathnames.public.login)
+			setIsFetching(false)
+		}
+	}
 
 	const logIn = async (login: string, password: string) => {
 		try {
@@ -22,7 +36,7 @@ export const useAccount = () => {
 			setAccount(data)
 		} catch {
 			showErrorAlert('Logging in error!')
-			navigate(Pathnames.public.logout)
+			logOut()
 		} finally {
 			setIsLoggingIn(false)
 		}
@@ -38,21 +52,8 @@ export const useAccount = () => {
 			}
 		} catch {
 			showErrorAlert('Unable to get current account!')
+			logOut()
 		} finally {
-			setIsFetching(false)
-		}
-	}
-
-	const logOut = async () => {
-		try {
-			setIsFetching(true)
-			await api.logOut()
-		} catch {
-			showErrorAlert('Logout failure!')
-		} finally {
-			localStorage.removeItem(TOKEN)
-			setAccount(null)
-			navigate(Pathnames.public.login)
 			setIsFetching(false)
 		}
 	}
