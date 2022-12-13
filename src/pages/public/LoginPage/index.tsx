@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormContainer } from './styles'
+import { useEffect } from 'react'
 
 const schema = yup.object({
 	login: yup.string().required('Login is required').min(2, 'Must be at least 2 characters'),
@@ -16,7 +17,7 @@ const schema = yup.object({
 type LoginFormType = yup.InferType<typeof schema>
 
 export const LoginPageComponent = () => {
-	const { isAuthenticated, logIn } = useAccount()
+	const { isAuthenticated, logIn, getCurrentAccount } = useAccount()
 
 	const {
 		register,
@@ -29,6 +30,10 @@ export const LoginPageComponent = () => {
 	const onSubmit = handleSubmit(({ login, password }) => {
 		logIn(login, password)
 	})
+
+	useEffect(() => {
+		getCurrentAccount()
+	}, [])
 
 	if (isAuthenticated) {
 		return <Navigate to={Pathnames.user.home} replace />
