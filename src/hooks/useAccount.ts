@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router'
 import { api } from '../api/api'
 import { TOKEN } from '../constants'
 import { useAccountState } from '../context/AccountContext'
 import { AccountTypeEnum } from '../enums/AccountType.enum'
+import { Pathnames } from '../router/pathnames'
 
 export const useAccount = () => {
+	const navigate = useNavigate()
 	const { account, setAccount, isLoggingIn, setIsLoggingIn, isFetching, setIsFetching } =
 		useAccountState()
 
@@ -37,6 +40,20 @@ export const useAccount = () => {
 		}
 	}
 
+	const logOut = async () => {
+		try {
+			setIsFetching(true)
+			await api.logOut()
+		} catch {
+			alert('Logout failure!')
+		} finally {
+			localStorage.removeItem(TOKEN)
+			setAccount(null)
+			navigate(Pathnames.public.login)
+			setIsFetching(false)
+		}
+	}
+
 	return {
 		account,
 		isLoggingIn,
@@ -45,5 +62,6 @@ export const useAccount = () => {
 		isAdmin,
 		logIn,
 		getCurrentAccount,
+		logOut,
 	}
 }
