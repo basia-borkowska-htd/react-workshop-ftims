@@ -25,21 +25,6 @@ export const useAccount = () => {
 		}
 	}
 
-	const getCurrentAccount = async () => {
-		try {
-			setIsFetching(true)
-
-			if (localStorage.getItem(TOKEN)) {
-				const { data } = await api.getCurrentAccount()
-				setAccount(data)
-			}
-		} catch {
-			alert('Unable to get current account!')
-		} finally {
-			setIsFetching(false)
-		}
-	}
-
 	const logOut = async () => {
 		try {
 			setIsFetching(true)
@@ -50,6 +35,22 @@ export const useAccount = () => {
 			localStorage.removeItem(TOKEN)
 			setAccount(null)
 			navigate(Pathnames.public.login)
+			setIsFetching(false)
+		}
+	}
+
+	const getCurrentAccount = async () => {
+		try {
+			setIsFetching(true)
+
+			if (localStorage.getItem(TOKEN)) {
+				const { data } = await api.getCurrentAccount()
+				setAccount(data)
+			}
+		} catch {
+			alert('Unable to get current account!')
+			logOut()
+		} finally {
 			setIsFetching(false)
 		}
 	}
