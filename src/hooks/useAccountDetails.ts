@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { api } from '../api/api'
 import { useAccountDetailsState } from '../context/AccountDetailsContext'
 import { AccountType } from '../types/Account'
+import { useAccounts } from './useAccounts'
 import { useAlert } from './useAlert'
 
 export const useAccountDetails = () => {
 	const { showErrorAlert } = useAlert()
 	const { isFetching, setIsFetching, account, setAccount } = useAccountDetailsState()
+	const { fetchAccounts } = useAccounts()
 
 	const getAccountDetails = async (login: string) => {
 		try {
@@ -36,6 +38,7 @@ export const useAccountDetails = () => {
 		try {
 			setIsUpdating(true)
 			await api.deleteAccount(login)
+			fetchAccounts()
 		} catch {
 			showErrorAlert('Unable to remove account')
 		} finally {
