@@ -1,14 +1,11 @@
-import { useNavigate } from 'react-router-dom'
 import { api } from '../api/api'
 import { TOKEN } from '../constants'
 import { useAccountState } from '../context/AccountContext'
 import { AccountTypeEnum } from '../enums/AccountType.enum'
-import { Pathnames } from '../router/pathnames'
 
 export const useAccount = () => {
 	const { account, setAccount, isLoggingIn, setIsLoggingIn, isFetching, setIsFetching } =
 		useAccountState()
-	const navigate = useNavigate()
 
 	const isAuthenticated = !!account?.login
 	const isAdmin = account?.accountType === AccountTypeEnum.ADMIN
@@ -20,7 +17,6 @@ export const useAccount = () => {
 			setAccount(data)
 		} catch {
 			alert('Logging in error!')
-			navigate(Pathnames.public.logout)
 		} finally {
 			setIsLoggingIn(false)
 		}
