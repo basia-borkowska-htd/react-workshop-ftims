@@ -1,7 +1,6 @@
 export const Pathnames = {
 	public: {
 		login: '/login',
-		logout: '/logout',
 	},
 	user: {
 		home: '/',
