@@ -15,7 +15,7 @@ export const apiWithConfig = axios.create({
 
 apiWithConfig.interceptors.request.use((config) => {
 	const token = window.localStorage.getItem('token')
-	if (token && config.headers) config.headers.Authorization = token
+	if (token && config.headers) config.headers.Authorization = JSON.parse(token)
 	return config
 })
 
