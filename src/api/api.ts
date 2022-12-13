@@ -6,6 +6,12 @@ export const api = {
 	logIn: (login: string, password: string): ApiResponseType<AccountType> => {
 		return apiWithConfig.put('/accounts/log_in', { login, password })
 	},
+	logOut: (): ApiResponseType<AccountType> => {
+		return apiWithConfig.put('/accounts/log_out')
+	},
+	getCurrentAccount: (): ApiResponseType<AccountType> => {
+		return apiWithConfig.get('/accounts/existing_account')
+	},
 	getAccounts: (): ApiResponseType<AccountType[]> => {
 		return apiWithConfig.get('/accounts')
 	},

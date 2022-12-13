@@ -7,7 +7,8 @@ export interface AccountType extends UserAccountType, AdminAccountType {
 	firstName: string
 	lastName: string
 	password: string
-	accountType: AccountTypeEnum
+	accountType?: AccountTypeEnum
+	token?: string
 }
 
 export interface UserAccountType {
