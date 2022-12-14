@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AdminLayout } from '../../components/layouts/AdminLayout'
 import { PublicLayout } from '../../components/layouts/PublicLayout'
 import { UserLayout } from '../../components/layouts/UserLayout'
+import { LoaderComponent } from '../../components/Loader'
 import { useAccount } from '../../hooks/useAccount'
 import { adminTheme, userTheme } from '../../styles/theme'
 import { Pathnames } from '../pathnames'
@@ -19,7 +20,7 @@ export const RoutesComponent = () => {
 	}, [])
 
 	if (isFetching) {
-		return <div>Loading</div>
+		return <LoaderComponent />
 	}
 
 	return (
