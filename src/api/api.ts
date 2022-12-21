@@ -18,11 +18,14 @@ export const api = {
 	getAccount: (login: string): ApiResponseType<AccountType> => {
 		return apiWithConfig.get(`/accounts/${login}`)
 	},
-	createAccount: (login: string): ApiResponseType<AccountType> => {
-		return apiWithConfig.post('/accounts', { login })
+	createUserAccount: (model: AccountType): ApiResponseType<AccountType> => {
+		return apiWithConfig.post('/accounts/create_user', { ...model })
+	},
+	createAdminAccount: (model: AccountType): ApiResponseType<AccountType> => {
+		return apiWithConfig.post('/accounts/create_admin', { ...model })
 	},
 	updateAccount: (login: string, model: AccountType): ApiResponseType<AccountType> => {
-		return apiWithConfig.post(`/accounts/${login}`, { model })
+		return apiWithConfig.put(`/accounts/${login}`, { ...model })
 	},
 	deleteAccount: (login: string) => {
 		return apiWithConfig.delete(`/accounts/${login}`)

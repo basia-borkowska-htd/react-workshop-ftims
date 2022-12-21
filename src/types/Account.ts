@@ -1,7 +1,7 @@
 import { AccountTypeEnum } from '../enums/AccountType.enum'
 
 export interface AccountType extends UserAccountType, AdminAccountType {
-	id: string
+	id?: string
 	email: string
 	login: string
 	firstName: string
@@ -12,9 +12,9 @@ export interface AccountType extends UserAccountType, AdminAccountType {
 }
 
 export interface UserAccountType {
-	NIP: string
+	NIP?: string
 }
 
 export interface AdminAccountType {
-	phone: string
+	phone?: string
 }

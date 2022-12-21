@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { api } from '../api/api'
 import { useAccountsState } from '../context/AccountsContext'
+import { AccountTypeEnum } from '../enums/AccountType.enum'
+import { AccountType } from '../types/Account'
 import { useAlert } from './useAlert'
 
 export const useAccounts = () => {
@@ -19,5 +22,21 @@ export const useAccounts = () => {
 		}
 	}
 
-	return { accounts, isFetching, fetchAccounts }
+	const [isCreating, setIsCreating] = useState(false)
+	const createAccount = async (account: AccountType) => {
+		try {
+			setIsCreating(true)
+			if (account.accountType === AccountTypeEnum.USER) {
+				await api.createUserAccount(account)
+			} else if (account.accountType === AccountTypeEnum.ADMIN) {
+				await api.createAdminAccount(account)
+			}
+		} catch {
+			showErrorAlert('Unable to create account')
+		} finally {
+			setIsCreating(false)
+		}
+	}
+
+	return { accounts, isFetching, fetchAccounts, isCreating, createAccount }
 }

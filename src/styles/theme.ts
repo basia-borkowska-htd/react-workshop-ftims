@@ -1,24 +1,33 @@
 import { createTheme } from '@mui/material'
 
+export const colors = {
+	primary: '#CC3A00',
+	secondary: '#B88400',
+	error: '#CC3A00',
+	warning: '#B4CC00',
+	info: '#00B8CC',
+	success: '#28E247',
+}
+
 export const adminTheme = createTheme({
 	palette: {
 		primary: {
-			main: '#CC3A00',
+			main: colors.primary,
 		},
 		secondary: {
-			main: '#B88400',
+			main: colors.secondary,
 		},
 		error: {
-			main: '#CC3A00',
+			main: colors.error,
 		},
 		warning: {
-			main: '#B4CC00',
+			main: colors.warning,
 		},
 		info: {
-			main: '#00B8CC',
+			main: colors.info,
 		},
 		success: {
-			main: '#28E247',
+			main: colors.success,
 		},
 	},
 })

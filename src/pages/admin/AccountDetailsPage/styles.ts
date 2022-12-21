@@ -1,11 +1,23 @@
 import { List } from '@mui/material'
 import styled from 'styled-components'
+import { colors } from '../../../styles/theme'
 
 export const ButtonsContainer = styled.div`
 	margin-top: 2rem;
 	display: flex;
 	gap: 1rem;
-	justify-content: end;
+	justify-content: space-between;
+	align-items: center;
+
+	a {
+		text-decoration: none;
+		color: ${colors.primary};
+	}
+
+	div {
+		display: flex;
+		gap: 1rem;
+	}
 `
 
 export const StyledList = styled(List)`
