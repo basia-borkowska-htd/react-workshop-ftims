@@ -8,8 +8,6 @@ interface AccountsState {
 	setAccounts: (item: AccountType[] | null) => void
 }
 
-export const SHOPPING_CART = 'SHOPPING_CART'
-
 export const AccountsStateContext = createContext<AccountsState | null>(null)
 
 export const AccountsStateContextProvider = ({ children }: { children: ReactNode }) => {
