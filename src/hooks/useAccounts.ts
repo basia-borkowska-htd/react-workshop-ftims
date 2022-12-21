@@ -26,7 +26,6 @@ export const useAccounts = () => {
 	const createAccount = async (account: AccountType) => {
 		try {
 			setIsCreating(true)
-			console.log(account)
 			if (account.accountType === AccountTypeEnum.USER) {
 				await api.createUserAccount(account)
 			} else if (account.accountType === AccountTypeEnum.ADMIN) {
